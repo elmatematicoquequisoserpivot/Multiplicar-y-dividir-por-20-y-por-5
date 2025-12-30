@@ -9,7 +9,7 @@ $(document).ready(function () {
   // Iniciar el juego al hacer clic en el botón "Start"
   $("#start").click(function () {
     let level = parseInt($("#level").val());
-    if (level >= 1 && level <= 5) {  // Poner aquí número de niveles
+    if (level >= 1 && level <= 7) {  // Poner aquí número de niveles
       resetGame();
       startTimer();
       generateProblems(level);
@@ -33,36 +33,43 @@ $(document).ready(function () {
   // Generar problemas según el nivel seleccionado
   function generateProblems(level) {
     var aleatorio = level;
-    for (let i = 0; i < 100; i++) {     // Poner aquí número de operaciones
-     if (aleatorio === 5)
-      {  level = Math.floor(Math.random() * 4) + 1  }; 
-      let x = generateIntegerX(level);
-      let y = generateIntegerY(level);
-      if (level ===1 || level ===2){
-        let correctAnswer = x * y;
-        problems.push({ x, y, correctAnswer, level });
-        }
-      if (level ===3 || level ===4){
-        let correctAnswer = x / y;
-        problems.push({ x, y, correctAnswer, level });
-        }
+    for (let i = 0; i < 5; i++) {     // Poner aquí número de operaciones
+     if (aleatorio === 7)
+      { let numeros = [1,2,3,4,5,6];
+        let indiceAleatorio = Math.floor(Math.random() * numeros.length);
+        level = numeros[indiceAleatorio];
+      }
+      if (level ===1){
+        let x = Math.floor(Math.random() * 50) + 1;
+        let correctAnswer = x * 20;
+        problems.push({ x, correctAnswer, level });
+      }
+      if (level ===2){
+        let x = Math.floor(Math.random() * 50) + 1;
+        let correctAnswer = x * 5;
+        problems.push({ x, correctAnswer, level });
+      }
+      if (level ===3){
+        let x = (Math.floor(Math.random() * 50) + 1)*20;
+        let correctAnswer = x / 20;
+        problems.push({ x, correctAnswer, level });
+      }
+      if (level ===4){
+        let x = (Math.floor(Math.random() * 50) + 1)*5;
+        let correctAnswer = x / 5;
+        problems.push({ x, correctAnswer, level });
+      }
+      if (level ===5){
+        let x = Math.floor(Math.random() * 50) + 1;
+        let correctAnswer = x * 10;
+        problems.push({ x, correctAnswer, level });
+      }
+      if (level ===6){
+        let x = (Math.floor(Math.random() * 50) + 1)*10;
+        let correctAnswer = x / 10;
+        problems.push({ x, correctAnswer, level });
+      }  
     }  
-  }
-
-  // 1º NÚMERO: Generar números enteros según el nivel
-  function generateIntegerX(level) {
-    if (level === 1) return Math.floor(Math.random() * 50) + 1;
-    if (level === 2) return Math.floor(Math.random() * 50) + 1;
-    if (level === 3) return (Math.floor(Math.random() * 50) + 1)*20;
-    if (level === 4) return (Math.floor(Math.random() * 50) + 1)*5;
-  }
-  
-  // 2º NÚMERO: Generar números enteros según el nivel
-  function generateIntegerY(level) {
-    if (level === 1) return 20;
-    if (level === 2) return 5;
-    if (level === 3) return 20;
-    if (level === 4) return 5; 
   }
 
   // Mostrar el problema actual
@@ -73,10 +80,10 @@ $(document).ready(function () {
     }
     updateProgressBar();
     let problem = problems[currentProblem];
-    if(problem.level===1 || problem.level===2){
+    if(problem.level===1){
     $("#problems").html(`
       <div class="problemStyle">
-        <p class="h4">${problem.x} x ${problem.y} = </p>
+        <p class="h4">${problem.x} x 20 = </p>
           <form id="problemForm">
             <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
             <button type="submit" class="btn btn-success mt-2">Enviar</button>
@@ -85,10 +92,58 @@ $(document).ready(function () {
     `) 
     $("#answer").focus();
       }
-    if(problem.level===3 || problem.level===4){
+    if(problem.level===2){
     $("#problems").html(`
       <div class="problemStyle">
-        <p class="h4">${problem.x} : ${problem.y} = </p>
+        <p class="h4">${problem.x} x 5 = </p>
+          <form id="problemForm">
+            <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+        </form>
+      </div>
+    `) 
+    $("#answer").focus();
+      }
+    if(problem.level===3){
+    $("#problems").html(`
+      <div class="problemStyle">
+        <p class="h4">${problem.x} : 20 = </p>
+          <form id="problemForm">
+            <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+        </form>
+      </div>
+    `) 
+    $("#answer").focus();
+      }
+    if(problem.level===4){
+    $("#problems").html(`
+      <div class="problemStyle">
+        <p class="h4">${problem.x} : 5 = </p>
+          <form id="problemForm">
+            <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+        </form>
+      </div>
+    `) 
+    $("#answer").focus();
+      }
+    if(problem.level===5){
+    $("#problems").html(`
+      <div class="problemStyle">
+        <p class="h4">${problem.x} x 10 = </p>
+          <form id="problemForm">
+            <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
+            <button type="submit" class="btn btn-success mt-2">Enviar</button>
+        </form>
+      </div>
+    `) 
+    $("#answer").focus();
+      }
+    if(problem.level===6){
+    $("#problems").html(`
+      <div class="problemStyle">
+        <p class="h4">${problem.x} : 10 = </p>
           <form id="problemForm">
             <input type="number" id="answer" class="form-control text-center" placeholder="Tu respuesta" inputmode="numeric">
             <button type="submit" class="btn btn-success mt-2">Enviar</button>
@@ -117,44 +172,107 @@ $(document).ready(function () {
   function handleCorrectAnswer(problem, level) {
     if (currentProblem < problems.length) {
     score++;
-      if(problem.level===1  || problem.level===2){
+      if(problem.level===1){
     operationsList.push({
-      text: `${problem.x} x ${problem.y} = ${problem.correctAnswer}`,
+      text: `${problem.x} x 20 = ${problem.correctAnswer}`,
       correct: true
     });
     currentProblem++;
     showProblem(level);
         }
-      if(problem.level===3  || problem.level===4){
+      if(problem.level===2){
     operationsList.push({
-      text: `${problem.x} : ${problem.y} = ${problem.correctAnswer}`,
+      text: `${problem.x} x 5 = ${problem.correctAnswer}`,
       correct: true
     });
     currentProblem++;
     showProblem(level);
         }
-
+      if(problem.level===3){
+    operationsList.push({
+      text: `${problem.x} : 20 = ${problem.correctAnswer}`,
+      correct: true
+    });
+    currentProblem++;
+    showProblem(level);
+        }
+      if(problem.level===4){
+    operationsList.push({
+      text: `${problem.x} : 5 = ${problem.correctAnswer}`,
+      correct: true
+    });
+    currentProblem++;
+    showProblem(level);
+        }
+      if(problem.level===5){
+    operationsList.push({
+      text: `${problem.x} x 10 = ${problem.correctAnswer}`,
+      correct: true
+    });
+    currentProblem++;
+    showProblem(level);
+        }
+      if(problem.level===6){
+    operationsList.push({
+      text: `${problem.x} : 10 = ${problem.correctAnswer}`,
+      correct: true
+    });
+    currentProblem++;
+    showProblem(level);
+        }
   }}
 
   // Manejar respuesta incorrecta
   function handleIncorrectAnswer(problem, userAnswer, level) {
       if (currentProblem < problems.length) {
-       if(problem.level===1  || problem.level===2){
+       if(problem.level===1){
         operationsList.push({
-        text: `${problem.x} x ${problem.y} = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        text: `${problem.x} x 20 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
         correct: false
       });
       currentProblem++;
       showProblem(level);
        }
-      if(problem.level===3  || problem.level===4){
+        if(problem.level===2){
         operationsList.push({
-        text: `${problem.x} : ${problem.y} = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        text: `${problem.x} x 5 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
         correct: false
       });
       currentProblem++;
       showProblem(level);
-      }
+       }
+        if(problem.level===3){
+        operationsList.push({
+        text: `${problem.x} : 20 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        correct: false
+      });
+      currentProblem++;
+      showProblem(level);
+       }
+        if(problem.level===4){
+        operationsList.push({
+        text: `${problem.x} : 5 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        correct: false
+      });
+      currentProblem++;
+      showProblem(level);
+       }
+        if(problem.level===5){
+        operationsList.push({
+        text: `${problem.x} x 10 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        correct: false
+      });
+      currentProblem++;
+      showProblem(level);
+       }
+        if(problem.level===6){
+        operationsList.push({
+        text: `${problem.x} : 10 = ${userAnswer} (Correcta: ${problem.correctAnswer})`,
+        correct: false
+      });
+      currentProblem++;
+      showProblem(level);
+       }
   }}
 
   // Actualizar la lista de operaciones
