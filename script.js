@@ -9,7 +9,7 @@ $(document).ready(function () {
   // Iniciar el juego al hacer clic en el botón "Start"
   $("#start").click(function () {
     let level = parseInt($("#level").val());
-    if (level >= 1 && level <= 7) {  // Poner aquí número de niveles
+    if (level >= 1 && level <= 10) {  // Poner aquí número de niveles
       resetGame();
       startTimer();
       generateProblems(level);
@@ -36,6 +36,21 @@ $(document).ready(function () {
     for (let i = 0; i < 120; i++) {     // Poner aquí número de operaciones
      if (aleatorio === 7)
       { let numeros = [1,2,3,4,5,6];
+        let indiceAleatorio = Math.floor(Math.random() * numeros.length);
+        level = numeros[indiceAleatorio];
+      }
+     if (aleatorio === 8)
+      { let numeros = [5,6];
+        let indiceAleatorio = Math.floor(Math.random() * numeros.length);
+        level = numeros[indiceAleatorio];
+      }
+     if (aleatorio === 9)
+      { let numeros = [1,3];
+        let indiceAleatorio = Math.floor(Math.random() * numeros.length);
+        level = numeros[indiceAleatorio];
+      }
+     if (aleatorio === 10)
+      { let numeros = [2,4];
         let indiceAleatorio = Math.floor(Math.random() * numeros.length);
         level = numeros[indiceAleatorio];
       }
